@@ -1,0 +1,56 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+        {
+            "name": ".NET Core Launch w/Dapr (webapi)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "daprd-debug-webapi",
+            "program": "${workspaceFolder}/sample.microservice.webapi/bin/Debug/netcoreapp3.1/sample.microservice.webapi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/sample.microservice.webapi",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5001"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "postDebugTask": "daprd-down-webapi"
+        },
+        {
+            "name": ".NET Core Launch w/Dapr (webapi2)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "daprd-debug-webapi2",
+            "program": "${workspaceFolder}/sample.microservice.webapi2/bin/Debug/netcoreapp3.1/sample.microservice.webapi2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/sample.microservice.webapi2",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:5002",
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "postDebugTask": "daprd-down-webapi2"
+        }
+    ],
+ "compounds": [
+     {
+       "name": "webApi + webApi2 w/Dapr",
+       "configurations": [".NET Core Launch w/Dapr (webapi)", ".NET Core Launch w/Dapr (webapi2)"]
+     }
+    ]
+ }

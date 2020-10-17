@@ -1,0 +1,33 @@
+POST http://localhost:5001/order HTTP/1.1
+content-type: application/json
+
+{
+  "CustomerCode": "Davide",
+  "Date": "2020-09-19T08:47:53.1224585Z",
+  "Items": [
+    {
+      "ProductCode": "cookie4",
+      "Quantity": 7
+    },
+    {
+      "ProductCode": "bussola1",
+      "Quantity": 6
+    }
+  ]
+}
+###
+GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
+###
+GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
+###
+POST http://localhost:5002/reserve HTTP/1.1
+content-type: application/json
+
+{
+    "SKU": "cookie2",
+    "Quantity": 4
+}
+###
+GET http://localhost:5020/v1.0/state/reservationstore/cookie2  HTTP/1.1
+###
+GET http://localhost:5002/balance/cookie2 HTTP/1.1

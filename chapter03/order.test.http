@@ -1,0 +1,24 @@
+POST http://localhost:5001/order HTTP/1.1
+content-type: application/json
+
+{
+  "Items": [
+    {
+      "ProductCode": "cookie1",
+      "Quantity": 3
+    },
+    {
+      "ProductCode": "ultimate-cookie5",
+      "Quantity": 2
+    }
+  ]
+}
+
+###
+POST http://localhost:5020/v1.0/invoke/reservation-service/method/reserve HTTP/1.1
+content-type: application/json
+
+{
+    "SKU": "cookie1",
+    "Quantity": 3
+}
