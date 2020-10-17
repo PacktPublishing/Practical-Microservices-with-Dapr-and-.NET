@@ -1,0 +1,16 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: customizationstore
+  namespace: default
+spec:
+  type: state.azure.cosmosdb
+  metadata:
+  - name: url
+    value: # Replace
+  - name: masterKey
+    value: # Replace
+  - name: database
+    value: state
+  - name: collection
+    value: customizationstate
