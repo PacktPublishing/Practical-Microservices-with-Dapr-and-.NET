@@ -7,7 +7,7 @@ namespace sample.microservice.reservation_grpc
     public static class Extensions
     {
 
-        public static Any ConvertToAnyTypeAsync<T>(this T data)
+        public static Any ConvertToAnyAsync<T>(this T data)
         {
             var any = new Any();
             if (data == null)
@@ -23,7 +23,7 @@ namespace sample.microservice.reservation_grpc
             return any;
         }
 
-        public static T ConvertFromAnyTypeAsync<T>(this Any any)
+        public static T ConvertFromAnyAsync<T>(this Any any)
         {
             var options = new JsonSerializerOptions();
             options.PropertyNameCaseInsensitive = true;

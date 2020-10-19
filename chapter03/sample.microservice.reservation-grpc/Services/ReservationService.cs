@@ -16,11 +16,11 @@ namespace sample.microservice.reservation_grpc
             switch (request.Method)
             {
                 case "reserve":
-                    var input = Extensions.ConvertFromAnyTypeAsync<Item>(request.Data);
+                    var input = Extensions.ConvertFromAnyAsync<Item>(request.Data);
 
                     var output = new Item{SKU=input.SKU, Quantity = - input.Quantity};
 
-                    return Task.FromResult(new InvokeResponse {ContentType = "application/json", Data = Extensions.ConvertToAnyTypeAsync<Item>(output)});
+                    return Task.FromResult(new InvokeResponse {ContentType = "application/json", Data = Extensions.ConvertToAnyAsync<Item>(output)});
                 default:
                     Console.WriteLine("Method not supported");
                     return Task.FromResult(new InvokeResponse());
