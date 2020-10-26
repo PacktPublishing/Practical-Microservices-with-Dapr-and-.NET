@@ -6,7 +6,7 @@ spec:
   type: bindings.twilio.sms
   metadata:
   - name: fromNumber # required.
-    value: 205-679-5432
+    value: # REPLACE
   - name: accountSid # required.
     value: # REPLACE
   - name: authToken # required.
