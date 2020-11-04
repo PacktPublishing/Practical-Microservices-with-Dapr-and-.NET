@@ -11,7 +11,7 @@ spec:
   - name: consumerGroup         # EventHubs consumer group
     value: "group1"
   - name: storageAccountName    # Azure Storage Account Name
-    value: # REPLACE   
+    value: # REPLACE 
   - name: storageAccountKey     # Azure Storage Account Key
     value: # REPLACE               
   - name: storageContainerName  # Azure Storage Container Name

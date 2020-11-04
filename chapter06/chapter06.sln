@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.dto.shi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample.microservice.shipping", "sample.microservice.shipping\sample.microservice.shipping.csproj", "{52701B2F-157C-424E-A80F-52EB3B3C793E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chapter06", "Console\chapter06.csproj", "{7091DA37-6DC7-4229-8324-3A8F7DA27446}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,5 +144,17 @@ Global
 		{52701B2F-157C-424E-A80F-52EB3B3C793E}.Release|x64.Build.0 = Release|Any CPU
 		{52701B2F-157C-424E-A80F-52EB3B3C793E}.Release|x86.ActiveCfg = Release|Any CPU
 		{52701B2F-157C-424E-A80F-52EB3B3C793E}.Release|x86.Build.0 = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|x64.Build.0 = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Debug|x86.Build.0 = Debug|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|x64.ActiveCfg = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|x64.Build.0 = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|x86.ActiveCfg = Release|Any CPU
+		{7091DA37-6DC7-4229-8324-3A8F7DA27446}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
