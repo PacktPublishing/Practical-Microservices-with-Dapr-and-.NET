@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-service
+  namespace: default
+  labels:
+    app: shipping-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipping-service
+  template:
+    metadata:
+      labels:
+        app: shipping-service
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "shipping-service"
+        dapr.io/port: "80"
+        dapr.io/config: "tracing"
+        dapr.io/log-level: "info"
+        dapr.io/sidecar-memory-request: "250Mi"
+        dapr.io/sidecar-cpu-request: "100m"
+        dapr.io/sidecar-memory-limit: "4000Mi"
+        dapr.io/sidecar-cpu-limit: "1"
+        dapr.io/sidecar-liveness-probe-period-seconds: "20"
+        dapr.io/sidecar-readiness-probe-period-seconds: "20"
+    spec:
+      containers:
+      - name: shipping-service
+        image: daprk8scrdb.azurecr.io/sample.microservice.shipping:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "800Mi"
+            cpu: "400m"
+          requests:
+            memory: "200Mi"
+            cpu: "100m"
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: shipping-service-hpa
+  namespace: default
+spec:
+  maxReplicas: 4 # define max replica count
+  minReplicas: 1  # define min replica count
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shipping-service
+  targetCPUUtilizationPercentage: 50 # target CPU utilization
