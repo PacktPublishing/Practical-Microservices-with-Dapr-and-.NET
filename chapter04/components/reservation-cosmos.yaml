@@ -1,0 +1,15 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: reservationstore
+spec:
+  type: state.azure.cosmosdb
+  metadata:
+  - name: url
+    value: # replace
+  - name: masterKey
+    value: # replace 
+  - name: database
+    value: state
+  - name: collection
+    value: reservationstate

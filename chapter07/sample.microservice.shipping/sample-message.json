@@ -1,0 +1,13 @@
+{
+    "id": "4e2f90d0-56ec-4939-badf-9ffd034199cd",
+    "source": "console",
+    "type": "com.dapr.event.sent",
+    "specversion": "1.0",
+    "datacontenttype": "application/json",
+    "data": {
+        "OrderId": "08ec11cc-7591-4702-bb4d-7e86787b64fe"
+    },
+    "subject": "00-1f0f371b9b52924fbc5772d328c40af5-f8abbfbf1fbc0a42-01",
+    "topic": "OnOrder_Prepared",
+    "pubsubname": "commonpubsub"
+}

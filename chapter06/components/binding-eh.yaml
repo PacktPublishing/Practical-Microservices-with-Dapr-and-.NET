@@ -1,0 +1,18 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: reservationinput
+  namespace: default
+spec:
+  type: bindings.azure.eventhubs
+  metadata:
+  - name: connectionString      # Azure EventHubs connection string
+    value: # REPLACE
+  - name: consumerGroup         # EventHubs consumer group
+    value: "group1"
+  - name: storageAccountName    # Azure Storage Account Name
+    value: # REPLACE 
+  - name: storageAccountKey     # Azure Storage Account Key
+    value: # REPLACE               
+  - name: storageContainerName  # Azure Storage Container Name
+    value: "inputbinding"    
