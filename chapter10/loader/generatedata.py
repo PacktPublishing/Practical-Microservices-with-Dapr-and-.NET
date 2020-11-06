@@ -19,7 +19,7 @@ for i in range(0,1000):
     response = requests.post(url, json=data)
             
     if (response.status_code != 200):
-        print(f'\SKU:{sku}, error status code: {response.status_code}')
+        print(f'\tSKU:{sku}, error status code: {response.status_code}')
     else:
         url = StockGetUrl.format(id=sku)
         response = requests.get(url)
