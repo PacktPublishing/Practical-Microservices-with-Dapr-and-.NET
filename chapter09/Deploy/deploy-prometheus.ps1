@@ -1,15 +1,16 @@
 kubectl create namespace dapr-monitoring
 
 # install prometheuse via Helm 3
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm install dapr-prom stable/prometheus -n dapr-monitoring
+helm install dapr-prom prometheus-community/prometheus -n dapr-monitoring
 # verify installation
 kubectl get pods -n dapr-monitoring
 
 # install grafana via Helm 3
-helm install grafana stable/grafana -n dapr-monitoring --set persistence.enabled=true
-
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm install grafana grafana/grafana -n dapr-monitoring
 # get 
 kubectl get pods -n dapr-monitoring
 

@@ -9,6 +9,7 @@ using sample.microservice.dto.reservation;
 using sample.microservice.state.reservation;
 using sample.microservice.dto.customization;
 using System.Linq;
+using System.Text.Json;
 
 namespace sample.microservice.reservation.Controllers
 {
@@ -146,6 +147,32 @@ namespace sample.microservice.reservation.Controllers
             Console.WriteLine($"Retrieved {result.SKU} is {result.BalanceQuantity}");
 
             return result;
+        }
+
+        [HttpPost("reservationinput")]
+        public async Task<IActionResult> Refill([FromServices] DaprClient daprClient)
+        {
+            using (var reader = new System.IO.StreamReader(Request.Body))
+            {
+                // boldly assume the input is correctly formatted
+                var body = await reader.ReadToEndAsync();
+                var item = JsonSerializer.Deserialize<dynamic>(body);
+                var SKU = item.GetProperty("SKU").GetString();
+                var Quantity = item.GetProperty("Quantity").GetInt32();
+
+                var stateItem = await daprClient.GetStateEntryAsync<ItemState>(StoreName_item, SKU);
+                stateItem.Value ??= new ItemState() { SKU = SKU, Changes = new List<ItemReservation>() };
+
+                // update balance
+                stateItem.Value.BalanceQuantity += Quantity;
+
+                // save item state
+                await stateItem.SaveAsync();
+
+                Console.WriteLine($"Refill of {SKU} for quantity {Quantity}, new balance {stateItem.Value.BalanceQuantity}");
+            }
+
+            return this.Ok();
         }
     }
 }
