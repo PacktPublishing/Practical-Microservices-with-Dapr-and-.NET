@@ -1,0 +1,22 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: reservationitemactorstore
+  namespace: default
+spec:
+  type: state.azure.cosmosdb
+  metadata:
+  - name: url
+    secretKeyRef:
+      name: cosmosdb-secret
+      key: url
+  - name: masterKey
+    secretKeyRef:
+      name: cosmosdb-secret
+      key: masterKey
+  - name: database
+    value: state
+  - name: collection
+    value: reservationitemactorstate
+  - name: actorStateStore
+    value: "true"

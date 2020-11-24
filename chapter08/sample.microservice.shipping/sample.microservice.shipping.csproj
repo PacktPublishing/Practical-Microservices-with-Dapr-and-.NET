@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapr.AspNetCore" Version="0.11.0-preview02" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\sample.microservice.dto.shipping\sample.microservice.dto.shipping.csproj" />
+    <ProjectReference Include="..\sample.microservice.common\sample.microservice.common.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservationactor-service
+  namespace: default
+  labels:
+    app: reservationactor-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservationactor-service
+  template:
+    metadata:
+      labels:
+        app: reservationactor-service
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "reservationactor-service"
+        dapr.io/port: "80"
+        dapr.io/config: "tracing"
+        dapr.io/log-level: "info"
+        dapr.io/sidecar-memory-request: "250Mi"
+        dapr.io/sidecar-cpu-request: "100m"
+        dapr.io/sidecar-memory-limit: "4000Mi"
+        dapr.io/sidecar-cpu-limit: "1"
+        dapr.io/sidecar-liveness-probe-period-seconds: "20"
+        dapr.io/sidecar-readiness-probe-period-seconds: "20"
+    spec:
+      containers:
+      - name: reservationactor-service
+        image: daprk8scrdb.azurecr.io/sample.microservice.reservationactor:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "800Mi"
+            cpu: "400m"
+          requests:
+            memory: "200Mi"
+            cpu: "100m"
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reservationactor-service-hpa
+  namespace: default
+spec:
+  maxReplicas: 20 # define max replica count
+  minReplicas: 1  # define min replica count
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reservationactor-service
+  targetCPUUtilizationPercentage: 50 # target CPU utilization

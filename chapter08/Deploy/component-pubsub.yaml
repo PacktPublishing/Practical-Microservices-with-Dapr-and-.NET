@@ -1,0 +1,16 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: commonpubsub
+  namespace: default
+spec:
+  type: pubsub.azure.servicebus
+  metadata:
+  - name: connectionString
+    secretKeyRef:
+      name: servicebus-secret
+      key: connectionString
+  - name: lockDurationInSec
+    value: "60"
+  - name: lockRenewalInSec
+    value: "30"

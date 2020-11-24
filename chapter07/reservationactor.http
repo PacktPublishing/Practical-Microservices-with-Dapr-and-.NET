@@ -3,3 +3,4 @@ content-type: application/json
 
 -36
 ###
+GET http://127.0.0.1:5014/v1.0/actors/ReservationItemActor/crazycookie/method/GetBalance HTTP/1.1
