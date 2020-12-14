@@ -1,3 +1,8 @@
+## $5 Tech Unlocked 2021!
+[Buy and download this Book for only $5 on PacktPub.com](https://www.packtpub.com/product/practical-microservices-with-dapr-and-net/9781800568372)
+-----
+*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
+
 # Practical Microservices with Dapr and .NET
 
 <a href="https://www.packtpub.com/web-development/practical-microservices-with-dapr-and-net?utm_source=github&utm_medium=repository&utm_campaign=9781800568372"><img src="https://static.packt-cdn.com/products/9781800568372/cover/smaller" alt="Practical Microservices with Dapr and .NET" height="256px" align="right"></a>
