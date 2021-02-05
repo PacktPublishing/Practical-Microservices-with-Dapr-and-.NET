@@ -23,6 +23,18 @@ If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1800
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
 
+## Errata
+
+* page 14: The sentence "After we execute dapr init, if we check the Dapr version, we can see it is now moved forward from 0.8.0 to 0.10.0 for both the CLI and the runtime:" must be read as "After we execute dapr init, if we check the Dapr version, we can see it is now moved forward from 0.11 to 1.0.0-rc.1 for both the CLI and the runtime:"
+* page 14: The sentence "These are going to be much easier to do via VS Code, with the <directory>\code. command" must be read as "These are going to be much easier to do via VS Code, with the ```<directory>\code .``` command."
+* page 17: The command ```dapr run –app-id <your app id> --app-port <port of the application> --dapr-http-port <port in Dapr> dotnet run``` must be read as ```dapr run --app-id <your app id> --app-port <port of the application> --dapr-http-port <port in Dapr> dotnet run```
+* page 35: The command following the "You can use the most recent public version or a daily build:" sentence is incorrect and the correct one is as follows:
+  ```
+  PS C:\Windows\System32> dotnet tool install -g Microsoft.Tye --version "0.6.0-alpha.21070.5"
+  You can invoke the tool using the following command: tye
+  Tool 'microsoft.tye' (version '0.6.0-alpha.21070.5') was successfully installed.
+  ```
+
 ## Instructions and Navigations
 All of the code is organized into folders. For example, Chapter02.
 
