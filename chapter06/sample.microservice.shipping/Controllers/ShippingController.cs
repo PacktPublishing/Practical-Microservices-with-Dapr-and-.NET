@@ -36,22 +36,7 @@ namespace sample.microservice.shipping.Controllers
 
             Console.WriteLine($"Shipment of orderId {orderShipment.OrderId} completed with id {result}");
 
-            var metadata = new Dictionary<string,string>();
-            metadata.Add("toNumber","#replace");
-            await daprClient.InvokeBindingAsync<string>("twilio","create", $"Dear customer, your order with {orderShipment.OrderId} completed and shipped", metadata);
-
-            Console.WriteLine($"Shipment of orderId {orderShipment.OrderId} notified to customer");
-
             return this.Ok();
         }
-        
-        [HttpPost("cron")]
-        public async Task<IActionResult> Cron()
-        {
-            Console.WriteLine($"Cron @{DateTime.Now.ToString()} ");
-
-            return new OkResult();
-        }
-
     }
 }

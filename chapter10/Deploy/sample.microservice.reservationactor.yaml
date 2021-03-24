@@ -16,8 +16,8 @@ spec:
         app: reservationactor-service
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "reservationactor-service"
-        dapr.io/port: "80"
+        dapr.io/app-id: "reservationactor-service"
+        dapr.io/app-port: "80"
         dapr.io/config: "tracing"
         dapr.io/log-level: "info"
         dapr.io/sidecar-memory-request: "250Mi"

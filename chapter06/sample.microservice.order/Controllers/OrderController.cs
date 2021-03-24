@@ -28,13 +28,19 @@ namespace sample.microservice.order.Controllers
         [HttpPost("order")]
         public async Task<ActionResult<Guid>> SubmitOrder(Order order, [FromServices] DaprClient daprClient)
         {
-            if (!ValidateOrder(order)) { return BadRequest(); }
+            if (!Validate(order)) { return BadRequest(); }
             // order validated
             order.Id = Guid.NewGuid();
 
             var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
             state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
 
+            // Console.WriteLine($"ETag {state.ETag}");
+            // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
+            // await state.SaveAsync(options);
+            // var metadata = new Dictionary<string,string>();
+            // metadata.Add("partitionKey","something_else");
+            // await state.SaveAsync(metadata: metadata);
             await state.SaveAsync();
 
             await daprClient.PublishEventAsync<Order>(PubSub, common.Topics.OrderSubmittedTopicName, order);
@@ -65,7 +71,7 @@ namespace sample.microservice.order.Controllers
             await state.SaveAsync();
 
             Console.WriteLine($"Acknowledged reservation failed for order {reservation.OrderId}");
-            return reservation.OrderId;
+            return this.Ok();
         }
 
         /// <summary>
@@ -90,7 +96,7 @@ namespace sample.microservice.order.Controllers
             await state.SaveAsync();
 
             Console.WriteLine($"Acknowledged customization failed for order {customization.OrderId}");
-            return customization.OrderId;
+            return this.Ok();
         }
 
         /// <summary>
@@ -112,7 +118,7 @@ namespace sample.microservice.order.Controllers
             return result;
         }
 
-        private static bool ValidateOrder(Order order)
+        private static bool Validate(Order order)
         {
             // validation
             var groupedItem = 

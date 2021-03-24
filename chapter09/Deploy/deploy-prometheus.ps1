@@ -20,8 +20,7 @@ kubectl get secret --namespace dapr-monitoring grafana -o jsonpath="{.data.admin
 $base64secret = kubectl get secret --namespace dapr-monitoring grafana -o jsonpath="{.data.admin-password}"
 $password = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($base64secret))
 $password
-# a sample password
-w8O9dMin8nGIn8p9h9tgtTgnd64yQsJ7bnjwQm5A
+# a sample password: 9GPXmb6qsWG0oN1jLb1gq1ePWqc83OJsa3Tb43gb
 
 # get prometheuse service --> Grafana data source http://dapr-prom-prometheus-server.dapr-monitoring
 kubectl get svc -n dapr-monitoring
