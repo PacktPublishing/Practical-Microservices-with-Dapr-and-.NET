@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Dapr;
 using Dapr.Client;
-using Dapr.Client.Http;
 using Microsoft.AspNetCore.Mvc;
 using sample.microservice.dto.order;
 using sample.microservice.dto.reservation;

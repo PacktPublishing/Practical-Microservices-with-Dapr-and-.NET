@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Dapr;
 using Dapr.Client;
-using Dapr.Client.Http;
 using Microsoft.AspNetCore.Mvc;
 using sample.microservice.dto.order;
 using sample.microservice.dto.reservation;
@@ -28,19 +27,13 @@ namespace sample.microservice.order.Controllers
         [HttpPost("order")]
         public async Task<ActionResult<Guid>> SubmitOrder(Order order, [FromServices] DaprClient daprClient)
         {
-            if (!Validate(order)) { return BadRequest(); }
+            if (!ValidateOrder(order)) { return BadRequest(); }
             // order validated
             order.Id = Guid.NewGuid();
 
             var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
             state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
 
-            // Console.WriteLine($"ETag {state.ETag}");
-            // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
-            // await state.SaveAsync(options);
-            // var metadata = new Dictionary<string,string>();
-            // metadata.Add("partitionKey","something_else");
-            // await state.SaveAsync(metadata: metadata);
             await state.SaveAsync();
 
             await daprClient.PublishEventAsync<Order>(PubSub, common.Topics.OrderSubmittedTopicName, order);
@@ -71,7 +64,7 @@ namespace sample.microservice.order.Controllers
             await state.SaveAsync();
 
             Console.WriteLine($"Acknowledged reservation failed for order {reservation.OrderId}");
-            return this.Ok();
+            return reservation.OrderId;
         }
 
         /// <summary>
@@ -96,7 +89,7 @@ namespace sample.microservice.order.Controllers
             await state.SaveAsync();
 
             Console.WriteLine($"Acknowledged customization failed for order {customization.OrderId}");
-            return this.Ok();
+            return customization.OrderId;
         }
 
         /// <summary>
@@ -118,7 +111,7 @@ namespace sample.microservice.order.Controllers
             return result;
         }
 
-        private static bool Validate(Order order)
+        private static bool ValidateOrder(Order order)
         {
             // validation
             var groupedItem = 

@@ -9,6 +9,7 @@ using sample.microservice.dto.reservation;
 using sample.microservice.state.reservation;
 using sample.microservice.dto.customization;
 using System.Linq;
+using System.Text.Json;
 
 namespace sample.microservice.reservation.Controllers
 {
@@ -19,12 +20,6 @@ namespace sample.microservice.reservation.Controllers
         public const string StoreName_item = "reservationitemstore";
         public const string PubSub = "commonpubsub";
         
-        /// <summary>
-        /// Method for reserving all items quantity in an order.
-        /// </summary>
-        /// <param name="order">Order info.</param>
-        /// <param name="daprClient">State client to interact with Dapr runtime.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Topic(PubSub, common.Topics.OrderSubmittedTopicName)]
         [HttpPost(common.Topics.OrderSubmittedTopicName)]
         public async Task<ActionResult<OrderReservation>> ReserveOrder(Order order, [FromServices] DaprClient daprClient)
@@ -71,12 +66,6 @@ namespace sample.microservice.reservation.Controllers
             return this.Ok();
         }
 
-        /// <summary>
-        /// Method for reserving all items quantity in an order.
-        /// </summary>
-        /// <param name="order">Order info.</param>
-        /// <param name="daprClient">State client to interact with Dapr runtime.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [Topic(PubSub, common.Topics.CustomizationFailedTopicName)]
         [HttpPost(common.Topics.CustomizationFailedTopicName)]
         public async Task<ActionResult<Guid>> OnCustomizationFailed(OrderCustomization customization, [FromServices] DaprClient daprClient)
@@ -144,12 +133,6 @@ namespace sample.microservice.reservation.Controllers
             return this.Ok();
         }
 
-        /// <summary>
-        /// Method for reserving an item quantity.
-        /// </summary>
-        /// <param name="reservation">Reservation info.</param>
-        /// <param name="daprClient">State client to interact with Dapr runtime.</param>
-        /// <returns>A <see cref="Task{TResult}"/> representing the result of the asynchronous operation.</returns>
         [HttpGet("balance/{state}")]
         public ActionResult<Item> Get([FromState(StoreName_item)]StateEntry<ItemState> state, [FromServices] DaprClient daprClient)
         {
@@ -164,6 +147,32 @@ namespace sample.microservice.reservation.Controllers
             Console.WriteLine($"Retrieved {result.SKU} is {result.BalanceQuantity}");
 
             return result;
+        }
+
+        [HttpPost("reservationinput")]
+        public async Task<IActionResult> Refill([FromServices] DaprClient daprClient)
+        {
+            using (var reader = new System.IO.StreamReader(Request.Body))
+            {
+                // boldly assume the input is correctly formatted
+                var body = await reader.ReadToEndAsync();
+                var item = JsonSerializer.Deserialize<dynamic>(body);
+                var SKU = item.GetProperty("SKU").GetString();
+                var Quantity = item.GetProperty("Quantity").GetInt32();
+
+                var stateItem = await daprClient.GetStateEntryAsync<ItemState>(StoreName_item, SKU);
+                stateItem.Value ??= new ItemState() { SKU = SKU, Changes = new List<ItemReservation>() };
+
+                // update balance
+                stateItem.Value.BalanceQuantity += Quantity;
+
+                // save item state
+                await stateItem.SaveAsync();
+
+                Console.WriteLine($"Refill of {SKU} for quantity {Quantity}, new balance {stateItem.Value.BalanceQuantity}");
+            }
+
+            return this.Ok();
         }
     }
 }

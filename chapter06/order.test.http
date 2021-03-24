@@ -50,9 +50,9 @@ content-type: application/json
     "Quantity": 4
 }
 ###
-GET http://localhost:5020/v1.0/state/reservationstore/cookie2  HTTP/1.1
+GET http://localhost:5020/v1.0/state/reservationstore/bussola8  HTTP/1.1
 ###
-GET http://localhost:5002/balance/cookie43 HTTP/1.1
+GET http://localhost:5002/balance/bussola8 HTTP/1.1
 ###
 POST http://localhost:5020/v1.0/state/reservationitemstore HTTP/1.1
 content-type: application/json

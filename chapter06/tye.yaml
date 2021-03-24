@@ -4,7 +4,7 @@
 # when you've given us a try, we'd love to know what you think:
 #    https://aka.ms/AA7q20u
 #
-name: chapter04
+name: chapter06
 extensions:
 - name: dapr
 
@@ -18,7 +18,7 @@ extensions:
   # config: myconfig
 
   # components-path configures the components path of the dapr sidecard
-  # components-path: "./components/"
+  components-path: "./.private/"
 services:
 - name: order-service
   project: sample.microservice.order/sample.microservice.order.csproj
@@ -26,6 +26,8 @@ services:
   project: sample.microservice.reservation/sample.microservice.reservation.csproj
 - name: customization-service
   project: sample.microservice.customization/sample.microservice.customization.csproj
+- name: shipping-service
+  project: sample.microservice.shipping/sample.microservice.shipping.csproj
 
 # This may conflict with the redis instance that dapr manages.
 #

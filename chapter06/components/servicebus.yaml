@@ -7,4 +7,8 @@ spec:
   type: pubsub.azure.servicebus
   metadata:
   - name: connectionString
-    value: # replace
+    value: # REPLACE
+  - name: lockDurationInSec
+    value: 60
+  - name: lockRenewalInSec
+    value: 30

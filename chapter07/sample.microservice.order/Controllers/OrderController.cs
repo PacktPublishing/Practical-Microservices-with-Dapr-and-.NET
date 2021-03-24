@@ -27,7 +27,7 @@ namespace sample.microservice.order.Controllers
         [HttpPost("order")]
         public async Task<ActionResult<Guid>> SubmitOrder(Order order, [FromServices] DaprClient daprClient)
         {
-            if (!Validate(order)) { return BadRequest(); }
+            if (!ValidateOrder(order)) { return BadRequest(); }
             // order validated
             order.Id = Guid.NewGuid();
 
@@ -113,7 +113,7 @@ namespace sample.microservice.order.Controllers
             return result;
         }
 
-        private static bool Validate(Order order)
+        private static bool ValidateOrder(Order order)
         {
             // validation
             var groupedItem = 
