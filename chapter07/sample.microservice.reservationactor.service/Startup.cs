@@ -10,7 +10,7 @@ namespace sample.microservice.reservationactor.service
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -18,7 +18,11 @@ namespace sample.microservice.reservationactor.service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting();
+            services.AddActors(options =>
+            {
+                // Register actor types and configure actor settings
+                options.Actors.RegisterActor<ReservationItemActor>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +37,14 @@ namespace sample.microservice.reservationactor.service
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                // Register actors handlers that interface with the Dapr runtime.
+                endpoints.MapActorsHandlers();
+            });
         }
     }
 }
