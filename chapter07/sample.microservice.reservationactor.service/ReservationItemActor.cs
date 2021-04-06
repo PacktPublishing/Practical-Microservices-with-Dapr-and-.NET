@@ -1,6 +1,6 @@
-using Dapr.Actors;
 using Dapr.Actors.Runtime;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using sample.microservice.reservationactor.interfaces;
 using sample.microservice.state.reservationactor;
@@ -15,10 +15,9 @@ namespace sample.microservice.reservationactor.service
         /// <summary>
         /// Initializes a new instance of ReservationItemActor
         /// </summary>
-        /// <param name="actorService">The Dapr.Actors.Runtime.ActorService that will host this actor instance.</param>
-        /// <param name="actorId">The Dapr.Actors.ActorId for this actor instance.</param>
-        public ReservationItemActor(ActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
+        /// <param name="host">The Dapr.Actors.Runtime.ActorHost that will host this actor instance.</param>
+        public ReservationItemActor(ActorHost host)
+            : base(host)
         {
         }
 
@@ -108,17 +107,25 @@ namespace sample.microservice.reservationactor.service
             return Task.CompletedTask;
         }
 
+        class TimerParams
+        {
+            public int IntParam { get; set; }
+            public string StringParam { get; set; }
+        }
+
         /// <summary>
         /// Register MyTimer timer with the actor
         /// </summary>
         public Task RegisterTimer()
         {
-            return this.RegisterTimerAsync(
-                "MyTimer",                  // The name of the timer
-                this.OnTimerCallBack,       // Timer callback
-                null,                       // User state passed to OnTimerCallback()
-                TimeSpan.FromSeconds(5),    // Time to delay before the async callback is first invoked
-                TimeSpan.FromSeconds(5));   // Time interval between invocations of the async callback
+            var timerParams = new TimerParams
+            {
+                IntParam = 100,
+                StringParam = "timer test",
+            };
+
+            var serializedTimerParams = JsonSerializer.SerializeToUtf8Bytes(timerParams);
+            return this.RegisterTimerAsync("MyTimer", nameof(this.TimerCallback), serializedTimerParams, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3));
         }
 
         /// <summary>
@@ -133,9 +140,9 @@ namespace sample.microservice.reservationactor.service
         /// <summary>
         /// Timer callback once timer is expired
         /// </summary>
-        private Task OnTimerCallBack(object data)
+        private Task TimerCallback(object data)
         {
-            Console.WriteLine("OnTimerCallBack is called!");
+            Console.WriteLine("TimerCallback is called!");
             return Task.CompletedTask;
         }
     }

@@ -1,5 +1,17 @@
-POST http://127.0.0.1:5014/v1.0/actors/ReservationItemActor/crazycookie/method/AddReservation HTTP/1.1
+POST http://127.0.0.1:5014/v1.0/actors/ReservationItemActor/rockiecookie/method/AddReservation HTTP/1.1
 content-type: application/json
 
--36
+-78
 ###
+GET http://127.0.0.1:5014/v1.0/actors/ReservationItemActor/crazycookie/method/GetBalance HTTP/1.1
+
+###
+POST http://localhost:5010/v1.0/state/orderstore/ 
+content-type: application/json
+
+[
+    {
+        "key": "nihilus",
+        "value": "darth"
+    }
+]

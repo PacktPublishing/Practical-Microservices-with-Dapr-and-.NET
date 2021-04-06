@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using Dapr.Actors.AspNetCore;
 using Microsoft.AspNetCore;
 
 namespace sample.microservice.reservationactor.service
@@ -13,16 +12,14 @@ namespace sample.microservice.reservationactor.service
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseActors(actorRuntime =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    // Register ReservationItemActor actor type
-                    actorRuntime.RegisterActor<ReservationItemActor>();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

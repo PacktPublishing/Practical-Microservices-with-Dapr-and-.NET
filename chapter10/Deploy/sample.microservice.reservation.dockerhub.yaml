@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservation-service
+  namespace: default
+  labels:
+    app: reservation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservation-service
+  template:
+    metadata:
+      labels:
+        app: reservation-service
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "reservation-service"
+        dapr.io/app-port: "80"
+        dapr.io/config: "tracing"
+        dapr.io/log-level: "info"
+        dapr.io/sidecar-memory-request: "250Mi"
+        dapr.io/sidecar-cpu-request: "100m"
+        dapr.io/sidecar-memory-limit: "4000Mi"
+        dapr.io/sidecar-cpu-limit: "1"
+        dapr.io/sidecar-liveness-probe-period-seconds: "20"
+        dapr.io/sidecar-readiness-probe-period-seconds: "20"
+    spec:
+      containers:
+      - name: reservation-service
+        image: davidebedin/sample.microservice.reservation:latest
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "800Mi"
+            cpu: "400m"
+          requests:
+            memory: "200Mi"
+            cpu: "100m"
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: reservation-service-hpa
+  namespace: default
+spec:
+  maxReplicas: 20 # define max replica count
+  minReplicas: 1  # define min replica count
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reservation-service
+  targetCPUUtilizationPercentage: 50 # target CPU utilization
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reservation-service
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: reservation-service
