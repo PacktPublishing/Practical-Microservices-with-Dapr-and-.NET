@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service
+  name: reservation-service
   namespace: default
   labels:
-    app: order-service
+    app: reservation-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: order-service
+      app: reservation-service
   template:
     metadata:
       labels:
-        app: order-service
+        app: reservation-service
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "order-service"
+        dapr.io/app-id: "reservation-service"
         dapr.io/app-port: "80"
         dapr.io/log-level: "info"
         dapr.io/sidecar-liveness-probe-period-seconds: "20"
         dapr.io/sidecar-readiness-probe-period-seconds: "20"
     spec:
       containers:
-      - name: order-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.order:latest
+      - name: reservation-service
+        image: davidebedin/sample.microservice.reservation:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -32,11 +32,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: order-service
+  name: reservation-service
   namespace: default
 spec:
   type: ClusterIP
   ports:
   - port: 80
   selector:
-    app: order-service
+    app: reservation-service

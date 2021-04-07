@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build-order",
+            "label": "build",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,36 +14,12 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "build-reservation",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/sample.microservice.reservation/sample.microservice.reservation.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "build-customization",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/sample.microservice.customization/sample.microservice.customization.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/sample.microservice.order.csproj",
+                "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -56,101 +32,68 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/sample.microservice.order.csproj",
+                "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "appId": "order-service",
-            "appPort": 5001,
-            "httpPort": 5010,
-            "grpcPort": 50010,
-            "metricsPort": 9091,
-            "componentsPath": "./components",
-            "label": "daprd-debug-order",
-            "type": "daprd",
-            "problemMatcher": {
-                "pattern": [
-                    {
-                      "regexp": ".",
-                      "file": 1,
-                      "location": 2,
-                      "message": 3
-                    }
-                ],
-                "background": {
-                    "beginsPattern": "^.*starting Dapr Runtime.*",
-                    "endsPattern": "^.*waiting on port.*"
-                }
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "chapter08:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/sample.microservice.order/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
             },
-            "dependsOn": "build-order"
+            "netCore": {
+                "appProject": "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj"
+            }
         },
         {
-            "appId": "reservation-service",
-            "appPort": 5002,
-            "httpPort": 5020,
-            "grpcPort": 50020,
-            "metricsPort": 9092,
-            "componentsPath": "./components",
-            "label": "daprd-debug-reservation",
-            "type": "daprd",
-            "problemMatcher": {
-                "pattern": [
-                    {
-                      "regexp": ".",
-                      "file": 1,
-                      "location": 2,
-                      "message": 3
-                    }
-                ],
-                "background": {
-                    "beginsPattern": "^.*starting Dapr Runtime.*",
-                    "endsPattern": "^.*waiting on port.*"
-                }
+            "type": "docker-build",
+            "label": "docker-build: release",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "chapter08:latest",
+                "dockerfile": "${workspaceFolder}/sample.microservice.order/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
             },
-            "dependsOn": "build-reservation"
+            "netCore": {
+                "appProject": "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj"
+            }
         },
         {
-            "appId": "customization-service",
-            "appPort": 5003,
-            "httpPort": 5030,
-            "grpcPort": 50030,
-            "metricsPort": 9093,
-            "componentsPath": "./components",
-            "label": "daprd-debug-customization",
-            "type": "daprd",
-            "problemMatcher": {
-                "pattern": [
-                    {
-                      "regexp": ".",
-                      "file": 1,
-                      "location": 2,
-                      "message": 3
-                    }
-                ],
-                "background": {
-                    "beginsPattern": "^.*starting Dapr Runtime.*",
-                    "endsPattern": "^.*waiting on port.*"
-                }
-            },
-            "dependsOn": "build-customization"
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj",
+                "enableDebugging": true,
+                "configureSsl": false
+            }
         },
         {
-            "appId": "order-service",
-            "label": "daprd-down-order",
-            "type": "daprd-down"
-        },
-        {
-            "appId": "reservation-service",
-            "label": "daprd-down-reservation",
-            "type": "daprd-down"
-        },
-        {
-            "appId": "customization-service",
-            "label": "daprd-down-customization",
-            "type": "daprd-down"
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build: release"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/sample.microservice.order/sample.microservice.order.csproj"
+            }
         }
     ]
 }

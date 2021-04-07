@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reservationactor-service
+  name: shipping-service
   namespace: default
   labels:
-    app: reservationactor-service
+    app: shipping-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reservationactor-service
+      app: shipping-service
   template:
     metadata:
       labels:
-        app: reservationactor-service
+        app: shipping-service
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "reservationactor-service"
+        dapr.io/app-id: "shipping-service"
         dapr.io/app-port: "80"
         dapr.io/log-level: "info"
         dapr.io/sidecar-liveness-probe-period-seconds: "20"
         dapr.io/sidecar-readiness-probe-period-seconds: "20"
     spec:
       containers:
-      - name: reservationactor-service
-        image: daprk8scrdb.azurecr.io/sample.microservice.reservationactor:latest
+      - name: shipping-service
+        image: davidebedin/sample.microservice.shipping:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always

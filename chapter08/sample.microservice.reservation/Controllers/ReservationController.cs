@@ -133,7 +133,7 @@ namespace sample.microservice.reservation.Controllers
 
             return result;
         }
-
+        
         [HttpPost("reservationinput")]
         public async Task<IActionResult> Refill([FromServices] DaprClient daprClient)
         {
@@ -147,11 +147,11 @@ namespace sample.microservice.reservation.Controllers
 
                 var actorID = new ActorId(SKU);
                 var proxy = ActorProxy.Create<IReservationItemActor>(actorID,"ReservationItemActor");
-                var balanceQuantity = await proxy.AddReservation(Quantity);
+                var balanceQuantity = await proxy.AddReservation(-Quantity);
 
                 Console.WriteLine($"Refill of {SKU} for quantity {Quantity}, new balance {balanceQuantity}");
             }
-
+            
             return this.Ok();
         }
     }
