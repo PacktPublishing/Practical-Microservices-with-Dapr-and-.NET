@@ -51,6 +51,7 @@ namespace sample.microservice.reservation
             {
                 Console.WriteLine("Enter Reservation");
                 
+                // DaprClient could be used to interact with State store etc..
                 var client = context.RequestServices.GetRequiredService<DaprClient>();
 
                 var item = await JsonSerializer.DeserializeAsync<Item>(context.Request.Body, serializerOptions);

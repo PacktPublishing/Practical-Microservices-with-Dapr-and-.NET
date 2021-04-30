@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Dapr.Actors" Version="1.0.0" />
+    <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Dapr.Actors" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

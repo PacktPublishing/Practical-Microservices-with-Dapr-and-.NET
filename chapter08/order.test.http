@@ -1,4 +1,4 @@
-POST http://localhost:5001/order HTTP/1.1
+POST http://localhost:5010/v1.0/invoke/order-service/method/order HTTP/1.1
 content-type: application/json
 
 {

@@ -9,7 +9,7 @@
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/sample.microservice.order/bin/Debug/netcoreapp3.1/sample.microservice.order.dll",
+        "program": "${workspaceFolder}/sample.microservice.order/bin/Debug/net5.0/sample.microservice.order.dll",
         "args": [],
         "cwd": "${workspaceFolder}/sample.microservice.order",
         "stopAtEntry": false,

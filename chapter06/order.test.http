@@ -42,7 +42,7 @@ GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
 GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
-POST http://localhost:5002/reserve HTTP/1.1
+POST http://localhost:5002/refill HTTP/1.1
 content-type: application/json
 
 {

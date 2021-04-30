@@ -21,7 +21,7 @@ extensions:
   # components-path: "./components/"
 services:
 - name: order-service
-  project: sample.microservice.order/sample.microservice.order.csproj
+  project: sample.microservice.order-grpc-client/sample.microservice.order-grpc-client.csproj
 - name: reservation-service
   project: sample.microservice.reservation-grpc/sample.microservice.reservation-grpc.csproj
 

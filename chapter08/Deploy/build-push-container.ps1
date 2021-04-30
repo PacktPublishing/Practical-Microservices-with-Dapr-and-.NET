@@ -2,25 +2,40 @@ param (
     [string]$prefix = "davidebedin", 
     [string]$tag = "latest"
     )
-$prefix = -join($prefix, "/")     
-$tag = -join(":", $tag)
+$builddate = "2021-04-25"
+$buildversion = "1.1"
 
-$order = $prefix + "sample.microservice.order" + $tag
-docker build . -f .\sample.microservice.order\Dockerfile -t $order
-docker push $order
+$container = "sample.microservice.order"
+$latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 
+$versioned = "{0}/{1}:{2}" -f $prefix, $container, $buildversion
+docker build . -f .\sample.microservice.order\Dockerfile -t $latest -t $versioned --build-arg BUILD_DATE=$builddate --build-arg BUILD_VERSION=$buildversion
+docker push $versioned
+docker push $latest 
 
-$reservationactor = $prefix + "sample.microservice.reservationactor" + $tag
-docker build . -f .\sample.microservice.reservationactor.service\Dockerfile -t $reservationactor
-docker push $reservationactor
+$container = "sample.microservice.reservationactor"
+$latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 
+$versioned = "{0}/{1}:{2}" -f $prefix, $container, $buildversion
+docker build . -f .\sample.microservice.reservationactor.service\Dockerfile -t $latest -t $versioned --build-arg BUILD_DATE=$builddate --build-arg BUILD_VERSION=$buildversion
+docker push $versioned
+docker push $latest 
 
-$reservation = $prefix + "sample.microservice.reservation" + $tag
-docker build . -f .\sample.microservice.reservation\Dockerfile -t $reservation
-docker push $reservation
+$container = "sample.microservice.reservation"
+$latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 
+$versioned = "{0}/{1}:{2}" -f $prefix, $container, $buildversion
+docker build . -f .\sample.microservice.reservation\Dockerfile -t $latest -t $versioned --build-arg BUILD_DATE=$builddate --build-arg BUILD_VERSION=$buildversion
+docker push $versioned
+docker push $latest
 
-$customization = $prefix + "sample.microservice.customization" + $tag
-docker build . -f .\sample.microservice.customization\Dockerfile -t $customization
-docker push $customization
+$container = "sample.microservice.customization"
+$latest = "{0}/{1}:{2}" -f $prefix, $container, $tag 
+$versioned = "{0}/{1}:{2}" -f $prefix, $container, $buildversion
+docker build . -f .\sample.microservice.customization\Dockerfile -t $latest -t $versioned --build-arg BUILD_DATE=$builddate --build-arg BUILD_VERSION=$buildversion
+docker push $versioned
+docker push $latest
 
-$shipping = $prefix + "sample.microservice.shipping" + $tag
-docker build . -f .\sample.microservice.shipping\Dockerfile -t $shipping
-docker push $shipping
+$container = "sample.microservice.shipping"
+$latest = "{0}/{1}:{2}" -f $prefix, $container, $tag
+$versioned = "{0}/{1}:{2}" -f $prefix, $container, $buildversion
+docker build . -f .\sample.microservice.shipping\Dockerfile -t $latest -t $versioned --build-arg BUILD_DATE=$builddate --build-arg BUILD_VERSION=$buildversion
+docker push $versioned
+docker push $latest 

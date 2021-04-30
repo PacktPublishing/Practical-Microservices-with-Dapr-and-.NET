@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net.Http;
 using Dapr;
 using Dapr.Client;
-using Dapr.Client.Http;
 using Microsoft.AspNetCore.Mvc;
 using sample.microservice.dto.order;
 using sample.microservice.dto.reservation;
@@ -32,22 +32,16 @@ namespace sample.microservice.order.Controllers
             var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
             state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
             
-            HTTPExtension httpExtension = new HTTPExtension()
-            {
-                Verb = HTTPVerb.Post
-            };
             foreach (var item in order.Items)
             {
                 var data = new Item() { SKU = item.ProductCode, Quantity = item.Quantity };
-                var result = await daprClient.InvokeMethodAsync<Item, Item>("reservation-service", "reserve", data, httpExtension);
+                var result = await daprClient.InvokeMethodAsync<Item, Item>(HttpMethod.Post, "reservation-service", "reserve", data);
             }
             
+            // Alternative approach with ETag for first-write-wins
             // Console.WriteLine($"ETag {state.ETag}");
             // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
             // await state.SaveAsync(options);
-            // var metadata = new Dictionary<string,string>();
-            // metadata.Add("partitionKey","something_else");
-            // await state.SaveAsync(metadata: metadata);
             await state.SaveAsync();
 
             Console.WriteLine($"Submitted order {order.Id}");

@@ -4,6 +4,7 @@ metadata:
   name: customizationstore
 spec:
   type: state.azure.cosmosdb
+  version: v1
   metadata:
   - name: url
     value: # REPLACE

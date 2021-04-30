@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   type: bindings.cron
+  version: v1
   metadata:
   - name: schedule
     value: "@every 10s" # valid cron schedule  

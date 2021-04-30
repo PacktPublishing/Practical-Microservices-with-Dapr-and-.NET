@@ -46,7 +46,7 @@ namespace sample.microservice.shipping.Controllers
         }
         
         [HttpPost("cron")]
-        public async Task<IActionResult> Cron()
+        public ActionResult Cron()
         {
             Console.WriteLine($"Cron @{DateTime.Now.ToString()} ");
 

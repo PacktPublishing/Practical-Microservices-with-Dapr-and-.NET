@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/dapr.microservice.webapi/bin/Debug/netcoreapp3.1/dapr.microservice.webapi.dll",
+            "program": "${workspaceFolder}/dapr.microservice.webapi/bin/Debug/net5.0/dapr.microservice.webapi.dll",
             "args": [],
             "cwd": "${workspaceFolder}/dapr.microservice.webapi",
             "stopAtEntry": false,

@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   type: pubsub.azure.servicebus
+  version: v1
   metadata:
   - name: connectionString
     value: # REPLACE

@@ -1,0 +1,6 @@
+controller:
+  podAnnotations:
+    dapr.io/enabled: "true" 
+    dapr.io/app-id: "nginx-ingress" 
+    dapr.io/app-protocol: "http"
+    dapr.io/app-port: "80"

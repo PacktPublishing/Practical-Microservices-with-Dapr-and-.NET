@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   type: state.azure.cosmosdb
+  version: v1
   metadata:
   - name: url
     value: # Replace
