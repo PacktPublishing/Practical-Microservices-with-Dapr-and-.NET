@@ -34,12 +34,10 @@ namespace sample.microservice.order.Controllers
             var state = await daprClient.GetStateEntryAsync<OrderState>(StoreName, order.Id.ToString());
             state.Value ??= new OrderState() { CreatedOn = DateTime.UtcNow, UpdatedOn = DateTime.UtcNow, Order = order };
 
+            // Alternative approach with ETag for first-write-wins
             // Console.WriteLine($"ETag {state.ETag}");
             // var options = new StateOptions() {Concurrency = ConcurrencyMode.FirstWrite, Consistency = ConsistencyMode.Strong};
             // await state.SaveAsync(options);
-            // var metadata = new Dictionary<string,string>();
-            // metadata.Add("partitionKey","something_else");
-            // await state.SaveAsync(metadata: metadata);
             await state.SaveAsync();
 
             await daprClient.PublishEventAsync<Order>(PubSub, common.Topics.OrderSubmittedTopicName, order);

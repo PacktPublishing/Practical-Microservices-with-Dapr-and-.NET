@@ -4,6 +4,7 @@ metadata:
   name: twilio
 spec:
   type: bindings.twilio.sms
+  version: v1
   metadata:
   - name: fromNumber # required.
     value: # REPLACE

@@ -1,0 +1,9 @@
+
+syntax = "proto3";
+
+option csharp_namespace = "sample.microservice.reservation_grpc.Generated";
+
+message Item {
+    string SKU = 1;
+    int32 Quantity = 2; 
+}

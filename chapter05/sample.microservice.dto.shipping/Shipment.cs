@@ -9,7 +9,7 @@ namespace sample.microservice.dto.shipping
 
         public Guid OrderId { get; set; }
 
-        public string CustomerCode { get; set; }
+        public string? CustomerCode { get; set; }
 
         public int NumberOfItems { get; set; }
     }

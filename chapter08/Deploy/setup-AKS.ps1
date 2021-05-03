@@ -1,8 +1,8 @@
 az login
-az account set --subscription "Sandbox"
+az account set --subscription "dabedin internal subscription"
 
 # create RG
-az group create --name daprk8srgdb  --location westeurope
+az group create --name daprk8srgdb  --location northeurope
 
 # create AKS --- no cluster autoscaler https://docs.microsoft.com/en-us/azure/aks/start-stop-cluster  
 az aks create --resource-group daprk8srgdb --name daprk8saksdb `

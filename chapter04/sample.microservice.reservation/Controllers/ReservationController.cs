@@ -10,7 +10,7 @@ using sample.microservice.state.reservation;
 namespace sample.microservice.reservation.Controllers
 {
     [ApiController]
-    public class OrderController : ControllerBase
+    public class ReservationController : ControllerBase
     {
         public const string StoreName = "reservationstore";
 

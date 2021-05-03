@@ -137,11 +137,15 @@ namespace sample.microservice.reservationactor.service
             return this.UnregisterTimerAsync("MyTimer");
         }
 
-        /// <summary>
-        /// Timer callback once timer is expired
+         /// <summary>
+        /// This method is called when the timer is triggered based on its registration.
+        /// It updates the PropertyA value.
         /// </summary>
-        private Task TimerCallback(object data)
+        /// <param name="data">Timer input data.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        public Task TimerCallback(byte[] data)
         {
+            var timerParams = JsonSerializer.Deserialize<TimerParams>(data);
             Console.WriteLine("TimerCallback is called!");
             return Task.CompletedTask;
         }

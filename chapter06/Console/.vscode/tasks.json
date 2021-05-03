@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/chapter03.csproj",
+                "${workspaceFolder}/chapter06.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/chapter03.csproj",
+                "${workspaceFolder}/chapter06.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,23 +32,11 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/chapter03.csproj",
+                "${workspaceFolder}/chapter06.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        },
-        {
-            "appId": "client-grpc",
-            "appPort": 3,
-            "label": "daprd-debug",
-            "type": "daprd",
-            "dependsOn": "build"
-        },
-        {
-            "appId": "client-grpc",
-            "label": "daprd-down",
-            "type": "daprd-down"
         }
     ]
 }

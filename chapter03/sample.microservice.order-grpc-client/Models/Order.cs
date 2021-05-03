@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace sample.microservice.order
+namespace sample.microservice.order.Models
 {
     public class Order
     {

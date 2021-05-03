@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Dapr;
 using Dapr.Client;
-using Dapr.Client.Http;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using sample.microservice.order.Models;
 
 namespace sample.microservice.order.Controllers
 {
@@ -23,16 +23,12 @@ namespace sample.microservice.order.Controllers
             
             order.Id = Guid.NewGuid();
 
-            HTTPExtension httpExtension = new HTTPExtension()
-            {
-                Verb = HTTPVerb.Post
-            };
             foreach (var item in order.Items)
             {
                 /* a dynamic type is passed to sample.microservice.reservation and not
                 the Order in scope of sample.microservice.order, you could use DTO instead */
                 var data = new { sku = item.ProductCode, quantity = item.Quantity };
-                var result = await daprClient.InvokeMethodAsync<object, dynamic>("reservation-service", "reserve", data, httpExtension);
+                var result = await daprClient.InvokeMethodAsync<object, dynamic>(HttpMethod.Post, "reservation-service", "reserve", data);
                 Console.WriteLine($"sku: {result.GetProperty("sku")} === new quantity: {result.GetProperty("quantity")}");
             }
             

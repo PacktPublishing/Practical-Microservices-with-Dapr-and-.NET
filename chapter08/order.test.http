@@ -1,4 +1,4 @@
-POST http://localhost:5001/order HTTP/1.1
+POST http://localhost:5010/v1.0/invoke/order-service/method/order HTTP/1.1
 content-type: application/json
 
 {
@@ -7,15 +7,15 @@ content-type: application/json
   "Items": [
     {
       "ProductCode": "rockiecookie",
-      "Quantity": 2
+      "Quantity": 4
     },
     {
-      "ProductCode": "bussola9",
-      "Quantity": 1
+      "ProductCode": "bussola8",
+      "Quantity": 7
     },
     {
       "ProductCode": "bussola1",
-      "Quantity": 1
+      "Quantity": 2
     },
     {
       "ProductCode": "crazycookie",
@@ -42,8 +42,8 @@ content-type: application/json
   ]
 }
 ###
-GET http://localhost:5001/order/fc43b659-48fe-4262-ab73-1b6418b2fa9b
+GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
-GET http://localhost:5010/v1.0/state/orderstore/fc43b659-48fe-4262-ab73-1b6418b2fa9b
+GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
 GET http://localhost:5002/balance/rockiecookie HTTP/1.1

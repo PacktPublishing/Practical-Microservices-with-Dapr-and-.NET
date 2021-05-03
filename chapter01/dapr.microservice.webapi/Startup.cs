@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +35,7 @@ namespace dapr.microservice.webapi
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapSubscribeHandler();
+                endpoints.MapSubscribeHandler();
                 endpoints.MapControllers();
             });
         }
