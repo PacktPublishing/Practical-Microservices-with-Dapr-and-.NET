@@ -1,5 +1,5 @@
 az login
-az account set --subscription "dabedin internal subscription"
+az account set --subscription "Sandbox"
 
 # create RG
 az group create --name daprk8srgdb  --location northeurope

@@ -24,7 +24,7 @@ namespace sample.microservice.reservation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDaprClient();
-            
+
             services.AddSingleton(new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
