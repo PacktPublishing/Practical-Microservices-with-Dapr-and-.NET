@@ -4,7 +4,7 @@
 # when you've given us a try, we'd love to know what you think:
 #    https://aka.ms/AA7q20u
 #
-name: chapter07
+name: chapter08
 extensions:
 - name: dapr
 
@@ -18,14 +18,14 @@ extensions:
   # config: myconfig
 
   # components-path configures the components path of the dapr sidecard
-  components-path: "./.private/"
+  components-path: "./components/"
 services:
 - name: order-service
   project: sample.microservice.order/sample.microservice.order.csproj
 - name: reservation-service
   project: sample.microservice.reservation/sample.microservice.reservation.csproj
 - name: reservationactor-service
-  project: sample.microservice.reservationactor.service\sample.microservice.reservationactor.service.csproj
+  project: sample.microservice.reservationactor.service/sample.microservice.reservationactor.service.csproj
 - name: customization-service
   project: sample.microservice.customization/sample.microservice.customization.csproj
 
