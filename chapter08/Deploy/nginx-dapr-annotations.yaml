@@ -4,3 +4,5 @@ controller:
     dapr.io/app-id: "nginx-ingress" 
     dapr.io/app-protocol: "http"
     dapr.io/app-port: "80"
+    dapr.io/log-level: "info"
+    dapr.io/config: "tracing"

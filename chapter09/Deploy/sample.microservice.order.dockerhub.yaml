@@ -29,15 +29,3 @@ spec:
         ports:
         - containerPort: 80
         imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: order-service
-  namespace: default
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-  selector:
-    app: order-service

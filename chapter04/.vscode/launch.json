@@ -21,7 +21,8 @@
          "stopAtEntry": false,
          "env": {
              "ASPNETCORE_ENVIRONMENT": "Development",
-             "ASPNETCORE_URLS": "http://+:5001"
+             "ASPNETCORE_URLS": "http://+:5001",
+             "DAPR_HTTP_PORT": "5010"
          },
          "sourceFileMap": {
              "/Views": "${workspaceFolder}/Views"
@@ -40,6 +41,7 @@
         "env": {
             "ASPNETCORE_ENVIRONMENT": "Development",
             "ASPNETCORE_URLS": "http://+:5002",
+            "DAPR_HTTP_PORT": "5020"
         },
         "sourceFileMap": {
             "/Views": "${workspaceFolder}/Views"

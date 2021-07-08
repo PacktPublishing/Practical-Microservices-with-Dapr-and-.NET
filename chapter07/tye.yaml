@@ -18,7 +18,7 @@ extensions:
   # config: myconfig
 
   # components-path configures the components path of the dapr sidecard
-  components-path: "./.private/"
+  components-path: "./components/"
 services:
 - name: order-service
   project: sample.microservice.order/sample.microservice.order.csproj

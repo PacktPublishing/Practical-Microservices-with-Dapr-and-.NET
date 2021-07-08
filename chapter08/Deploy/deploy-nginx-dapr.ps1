@@ -7,7 +7,7 @@ helm install nginx-ingress ingress-nginx/ingress-nginx `
     --namespace default `
     -f .\Deploy\nginx-dapr-annotations.yaml `
     --set controller.replicaCount=2 `
-    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="dapringresssdb"
+    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-dns-label-name"="dapringress"
 
 # verify
 kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller

@@ -13,4 +13,8 @@ kubectl apply -f .\Deploy\sample.microservice.reservationactor.dockerhub.yaml
 kubectl apply -f .\Deploy\sample.microservice.customization.dockerhub.yaml
 kubectl apply -f .\Deploy\sample.microservice.shipping.dockerhub.yaml
 
+# deploy service of applications ONLY if using classic NGINX --- NOT NEEDED if using NGINX + Dapr
+kubectl apply -f .\Deploy\service.sample.microservice.order.yaml
+kubectl apply -f .\Deploy\service.sample.microservice.reservation.yaml
+
 kubectl logs -l app=reservationactor-service -c reservationactor-service --namespace default -f
