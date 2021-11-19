@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="us-ascii"?>
-<Message xmlns="http://schemas.microsoft.com/servicebusexplorer">
-  <Date>domenica 4 ottobre 2020 21:23:59</Date>
-  <Content><![CDATA[{
-  "SKU": "bussola8",
-  "Quantity": 1
-}]]></Content>
-</Message>
