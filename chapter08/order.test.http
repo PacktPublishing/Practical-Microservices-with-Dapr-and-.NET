@@ -1,4 +1,6 @@
-POST http://localhost:5010/v1.0/invoke/order-service/method/order HTTP/1.1
+GET http://url/bbmb/balance/crazycookie HTTP/1.1
+###
+POST http://url/bbmb/order HTTP/1.1
 content-type: application/json
 
 {
@@ -27,7 +29,7 @@ content-type: application/json
       "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
       "Scope": 
       {
-        "ProductCode": "crazycookie",
+        "ProductCode": "bussola1",
         "Quantity": 1
       }
     },
@@ -35,8 +37,8 @@ content-type: application/json
       "CustomizationId" : "08ffffcc-7591-4702-ffff-fff6787bfffe",
       "Scope": 
       {
-        "ProductCode": "rockiecookie",
-        "Quantity": 2
+        "ProductCode": "crazycookie",
+        "Quantity": 1
       }
     }
   ]
@@ -46,4 +48,3 @@ GET http://localhost:5001/order/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
 GET http://localhost:5010/v1.0/state/orderstore/08ec11cc-7591-4702-bb4d-7e86787b64fe
 ###
-GET http://localhost:5002/balance/rockiecookie HTTP/1.1
