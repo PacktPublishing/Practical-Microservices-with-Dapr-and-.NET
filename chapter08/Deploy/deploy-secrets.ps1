@@ -1,3 +1,4 @@
+# delete and then create the secrets for the Dapr components
 kubectl delete secret cosmosdb-secret
 kubectl create secret generic cosmosdb-secret --from-literal=masterKey='#secret#' --from-literal=url='#secret#'
 kubectl delete secret servicebus-secret

@@ -1,1 +1,0 @@
-taskkill /IM "daprd.exe" /F

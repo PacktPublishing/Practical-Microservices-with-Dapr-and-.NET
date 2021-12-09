@@ -6,3 +6,4 @@ controller:
     dapr.io/app-port: "80"
     dapr.io/log-level: "info"
     dapr.io/config: "tracing"
+    dapr.io/sidecar-listen-addresses: "0.0.0.0"

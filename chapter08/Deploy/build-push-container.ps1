@@ -1,3 +1,6 @@
+# bonus content
+# with this file you can build all the project docker images with version and tag
+# in addition it pushes the images to the container registry
 param (
     [string]$prefix = "davidebedin", 
     [string]$tag = "latest"
