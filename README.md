@@ -1,3 +1,5 @@
+**Please note: This branch is intended to keep the content aligned with the first edition of the book**
+
 # Practical Microservices with Dapr and .NET
 
 <a href="https://www.packtpub.com/web-development/practical-microservices-with-dapr-and-net?utm_source=github&utm_medium=repository&utm_campaign=9781800568372"><img src="https://static.packt-cdn.com/products/9781800568372/cover/smaller" alt="Practical Microservices with Dapr and .NET" height="256px" align="right"></a>
