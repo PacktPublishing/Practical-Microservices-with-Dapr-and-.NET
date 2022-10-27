@@ -78,3 +78,7 @@ As CTO of an ISV, Davide led its significant transformational process with the o
 Davide particularly focused on the evolution of distributed computing to service-oriented architectures, and ultimately microservices, spending most of his developer career creating web services.
 As a cloud solution architect at Microsoft, Davide is responsible for the guidance and support of enterprise customers in embracing the cloud paradigm, a key enabler of their digital transformation; lately, he also plays with Dapr.
 
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781800568372">https://packt.link/free-ebook/9781800568372 </a> </p>
